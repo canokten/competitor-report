@@ -85,7 +85,7 @@
         <div class="card"><h3>Total Competitors</h3><div class="stat" id="kpi_total">—</div><div class="small" id="kpi_total_note"></div></div>
         <div class="card"><h3>Avg. Rating</h3><div class="stat" id="kpi_avg_rating">—</div><div class="small">Median: <span id="kpi_med_rating">—</span></div></div>
         <div class="card"><h3>Avg. Reviews</h3><div class="stat" id="kpi_avg_reviews">—</div><div class="small">Median: <span id="kpi_med_reviews">—</span></div></div>
-        <div class="card"><h3>Weighted score</h3><div class="stat" id="kpi_weighted">—</div><div class="small">How it’s calculated: <span id="kpi_weighted_note">rating × log10(1 + reviews)</span></div></div>
+        <div class="card"><h3>Weighted score</h3><div class="stat" id="kpi_weighted">—</div><div class="small"><span id="kpi_weighted_note"></span></div></div>
       </div>
     </section>
 
@@ -208,16 +208,18 @@
         document.getElementById('kpi_avg_rating').textContent = (k.avg_rating ?? '—');
         document.getElementById('kpi_med_rating').textContent = (k.med_rating ?? '—');
         document.getElementById('kpi_avg_reviews').textContent = k.avg_reviews ?? '—';
+        document.getElementById('kpi_med_reviews').textContent = k.med_reviews ?? '—';
         document.getElementById('kpi_weighted').textContent = (k.weighted ?? '—');
+        document.getElementById('kpi_weighted_note').textContent = (k.weighted_note ?? '—');
 
         // Services chips
-        const svc = (cfg.top_services || []);
-        const svcWrap = document.getElementById('kpi_services');
-        if (svc.length === 0) svcWrap.innerHTML = '<span class="small muted">No service tags provided.</span>';
-        svc.forEach(s => {
-          const span = document.createElement('span');
-          span.className = 'pill'; span.textContent = s; svcWrap.appendChild(span);
-        });
+        // const svc = (cfg.top_services || []);
+        // const svcWrap = document.getElementById('kpi_services');
+        // if (svc.length === 0) svcWrap.innerHTML = '<span class="small muted">No service tags provided.</span>';
+        // svc.forEach(s => {
+        //   const span = document.createElement('span');
+        //   span.className = 'pill'; span.textContent = s; svcWrap.appendChild(span);
+        // });
 
         // Embeds
         const embeds = cfg.embeds || {};
