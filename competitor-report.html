@@ -42,6 +42,7 @@
       .footer { page-break-after: always; }
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
   <!-- Sticky lightweight navbar / report meta -->
@@ -89,7 +90,7 @@
           <div class="small">Interactive filter: Neighborhood</div>
         </div>
         <div class="card">
-          <h3>Neighborhood Performance Score</h3>
+          <h3>Avg Rating × Review Count (Neighborhood)</h3>
           <iframe data-embed-key="neighborhood_weighted_rating" title="Weighted rating by neighborhood"></iframe>
           <div class="small">Weighted score = f(rating, reviews). Defined in Databricks dataset.</div>
         </div>
@@ -124,7 +125,6 @@
         <iframe data-embed-key="bottom25_table" title="Bottom 25"></iframe>
       </div>
     </section>
-
 
     <hr class="hr" />
 
@@ -180,8 +180,14 @@
         document.getElementById('reportLocation').textContent = cfg.location || '—';
         document.getElementById('reportDate').textContent = cfg.date || new Date().toISOString().slice(0,10);
 
-        // Summary
-        document.getElementById('summaryText').innerHTML = cfg.summary_html || '<p class="muted">Add a brief summary in <code>config.json</code> → <code>summary_html</code>.</p>';
+        // Summary (Markdown preferred; falls back to HTML)
+        const summaryEl = document.getElementById('summaryText');
+        if (cfg.summary_md) {
+          const html = (typeof marked !== 'undefined') ? marked.parse(cfg.summary_md) : cfg.summary_md;
+          summaryEl.innerHTML = html;
+        } else {
+          summaryEl.innerHTML = cfg.summary_html || '<p class="muted">Add summary in <code>config.json</code> → <code>summary_md</code> (Markdown) or <code>summary_html</code>.</p>';
+        }
 
         // KPIs
         const k = cfg.kpis || {};
