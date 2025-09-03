@@ -3,7 +3,7 @@
   "title": "Hair Salons — Vancouver, BC",
   "location": "Vancouver, BC",
   "date": "2025-09-02",
-  "kpis": { "total": 0, "avg_rating": null, "med_rating": null, "avg_reviews": null, "weighted": null },
+  "kpis": { "total": 115, "avg_rating": 4.59, "med_rating": 4.70, "avg_reviews": 164, "weighted": null },
   "top_services": [],
   "summary_md": "### Analysis Overview:\nAfter data collection and cleaning, 118 total salons are gathered for analysis. A total of 32 salons were removed from the analysis as they don't offer women's hair services, but somehow were included in the initial data collection.\n\nNext pages will include information about:\n\n#### 1. Executive Summary:\nBrief overview of the data, analysis and contents.\n\n#### 2. Market Landscape:\nOverview of the market, location scouting, map analysis.\n\n#### 3. Competitor Profiles:\nOverview of the top and worst competitors in the salon industry.\n\n#### 4. Service Investigation\nDeep dive into services offered by competitors.\n\n### Data Used:\nThe data is collected from publicly available data using the information on Google Maps. The salons included in this analysis were picked based on their services offered and places that do not offer hair services for women were removed from the analysis, regardless of what other services they offer.\n",
   "summary_html": "<p></p>",
