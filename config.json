@@ -8,7 +8,7 @@
   "summary_html": "<p>Summary will go here.</p>",
   "embeds": {
     "density_by_neighborhood": "https://dbc-2ed12710-091f.cloud.databricks.com/embed/dashboardsv3/01f08871a18518b0b82e1caeebdac565?o=2878672827937391",
-    "neighborhood_weighted_rating": "",
+    "neighborhood_weighted_rating": "https://dbc-2ed12710-091f.cloud.databricks.com/embed/dashboardsv3/01f0887269c4185f9c9fea0dd4de0d21?o=2878672827937391",
     "map_heatmap": "https://dbc-2ed12710-091f.cloud.databricks.com/embed/dashboardsv3/01f0886fa68e1a2fa08ca32046ee0c50?o=2878672827937391",
     "top20_table": "",
     "bottom20_table": ""
