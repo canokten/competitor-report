@@ -1,0 +1,18 @@
+{
+  "logoUrl": "./logo.png",
+  "title": "Hair Salons — Vancouver, BC",
+  "location": "Vancouver, BC",
+  "date": "2025-09-02",
+  "kpis": { "total": 0, "avg_rating": null, "med_rating": null, "avg_reviews": null, "weighted": null },
+  "top_services": [],
+  "summary_html": "<p>Summary will go here.</p>",
+  "embeds": {
+    "density_by_neighborhood": "",
+    "neighborhood_weighted_rating": "",
+    "map_heatmap": "https://dbc-2ed12710-091f.cloud.databricks.com/embed/dashboardsv3/01f084932940137ea20bd3d7c45b4f1c?o=2878672827937391",
+    "top20_table": "",
+    "bottom20_table": ""
+  },
+  "reviews": { "praises": [], "complaints": [] },
+  "footer": "Dataset: Apify Google Maps · Engine: Databricks Lakehouse"
+}

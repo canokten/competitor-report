@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Competitor Analysis Report</title>
+  <style>
+    :root {
+      --bg: #0b1020; --card: #121a35; --ink: #e6ecff; --muted: #9fb3ff; --accent: #7aa2ff; --chip: #1b2550;
+    }
+    html, body { background: var(--bg); color: var(--ink); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji"; margin: 0; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 24px; }
+    header { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center; margin-bottom: 20px; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand img { width: 40px; height: 40px; border-radius: 8px; }
+    .badge { background: var(--chip); color: var(--muted); border: 1px solid #2a3a7a; padding: 6px 10px; border-radius: 999px; font-size: 12px; }
+    .h1 { font-size: clamp(22px, 3vw, 32px); font-weight: 700; letter-spacing: .2px; }
+    .muted { color: var(--muted); }
+    .grid { display: grid; gap: 16px; }
+    .grid.kpi { grid-template-columns: repeat(4, minmax(0,1fr)); }
+    @media (max-width: 900px){ .grid.kpi{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media (max-width: 520px){ .grid.kpi{ grid-template-columns: 1fr; } }
+    .card { background: var(--card); border: 1px solid #22306a; border-radius: 16px; padding: 16px; box-shadow: 0 8px 24px rgb(0 0 0 / 0.24); }
+    .card h3 { margin: 0 0 8px; font-size: 16px; color: var(--muted); font-weight: 600; }
+    .stat { font-size: clamp(22px, 2.6vw, 30px); font-weight: 800; }
+    .pillrow { display: flex; gap: 6px; flex-wrap: wrap; }
+    .pill { background: var(--chip); color: var(--ink); border: 1px solid #2a3a7a; padding: 6px 10px; border-radius: 10px; font-size: 12px; }
+    .section h2 { font-size: 18px; margin: 0 0 10px; color: var(--muted); letter-spacing: .3px; }
+    iframe { width: 100%; height: 480px; border: none; border-radius: 12px; background: #0f152e; }
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 920px){ .two{ grid-template-columns: 1fr; } }
+    .small { font-size: 12px; color: var(--muted); }
+    .hr { height: 1px; background: #22306a; margin: 20px 0; border: none; }
+    .toc a { color: var(--ink); text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+    .sticky { position: sticky; top: 0; background: linear-gradient(180deg, rgba(11,16,32,.95), rgba(11,16,32,.7)); backdrop-filter: blur(6px); border-bottom: 1px solid #22306a; }
+    .footer { color: var(--muted); font-size: 12px; text-align: center; padding: 20px 0 40px; }
+    @media print { 
+      .sticky { position: static; backdrop-filter: none; }
+      iframe { height: 360px; }
+      a[href]::after{ content: " (" attr(href) ")"; font-size: 10px; color: var(--muted); }
+      .footer { page-break-after: always; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sticky lightweight navbar / report meta -->
+  <div class="sticky">
+    <div class="wrap" style="display:flex; align-items:center; gap:16px; justify-content:space-between;">
+      <div class="brand">
+        <img id="logo" alt="Logo" src="" />
+        <div>
+          <div class="h1" id="reportTitle">Sector Report</div>
+          <div class="muted small">Location: <span id="reportLocation">—</span> · Run date: <span id="reportDate">—</span></div>
+        </div>
+      </div>
+      <div class="pillrow toc">
+        <a class="badge" href="#summary">Summary</a>
+        <a class="badge" href="#landscape">Landscape</a>
+        <a class="badge" href="#map">Map</a>
+        <a class="badge" href="#profiles">Profiles</a>
+        <a class="badge" href="#reviews">Reviews</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <!-- Executive Summary / KPIs -->
+    <section id="summary" class="section">
+      <h2>Executive Summary</h2>
+      <div id="summaryText" class="card"></div>
+      <div class="grid kpi" style="margin-top:12px;">
+        <div class="card"><h3>Total Competitors</h3><div class="stat" id="kpi_total">—</div><div class="small" id="kpi_total_note"></div></div>
+        <div class="card"><h3>Avg. Rating</h3><div class="stat" id="kpi_avg_rating">—</div><div class="small">Median: <span id="kpi_med_rating">—</span></div></div>
+        <div class="card"><h3>Avg. Reviews</h3><div class="stat" id="kpi_avg_reviews">—</div><div class="small">Weighted score: <span id="kpi_weighted">—</span></div></div>
+        <div class="card"><h3>Top Focused Services</h3><div class="pillrow" id="kpi_services"></div></div>
+      </div>
+    </section>
+
+    <hr class="hr" />
+
+    <!-- Market Landscape visuals (Lakeview embeds) -->
+    <section id="landscape" class="section">
+      <h2>Market Landscape</h2>
+      <div class="two">
+        <div class="card">
+          <h3>Business Density by Neighborhood</h3>
+          <iframe data-embed-key="density_by_neighborhood" title="Density by neighborhood"></iframe>
+          <div class="small">Interactive filter: Neighborhood</div>
+        </div>
+        <div class="card">
+          <h3>Avg Rating × Review Count (Neighborhood)</h3>
+          <iframe data-embed-key="neighborhood_weighted_rating" title="Weighted rating by neighborhood"></iframe>
+          <div class="small">Weighted score = f(rating, reviews). Defined in Databricks dataset.</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="hr" />
+
+    <!-- Map heatmap & clusters (Lakeview embed) -->
+    <section id="map" class="section">
+      <h2>Competitor Locations & Densities</h2>
+      <div class="card">
+        <h3>Map: Heatmap + Clusters</h3>
+        <iframe data-embed-key="map_heatmap" title="Competitor map"></iframe>
+        <div class="small">Zoom & filter by neighborhood/category from dashboard controls.</div>
+      </div>
+    </section>
+
+    <hr class="hr" />
+
+    <!-- Top/Worst profiles (Lakeview tables) -->
+    <section id="profiles" class="section">
+      <h2>Top & Worst Competitor Profiles</h2>
+      <div class="two">
+        <div class="card">
+          <h3>Top 20 (Weighted Score)</h3>
+          <iframe data-embed-key="top20_table" title="Top 20"></iframe>
+        </div>
+        <div class="card">
+          <h3>Bottom 20 (Weighted Score)</h3>
+          <iframe data-embed-key="bottom20_table" title="Bottom 20"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <hr class="hr" />
+
+    <!-- Review semantics (optional text blocks filled from config.json) -->
+    <section id="reviews" class="section">
+      <h2>Reviews — Highlights</h2>
+      <div class="two">
+        <div class="card">
+          <h3>What customers praise</h3>
+          <ul id="praises"></ul>
+        </div>
+        <div class="card">
+          <h3>Recurring complaints</h3>
+          <ul id="complaints"></ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">Generated by Prisma Solutions · <span id="footerMeta">—</span></div>
+  </main>
+
+  <script>
+    // Minimal client-side binder for a config.json placed next to this file.
+    // config shape:
+    // {
+    //   "logoUrl": "./logo.png",
+    //   "title": "Hair Salons — Vancouver, BC",
+    //   "location": "Vancouver, BC",
+    //   "date": "2025-09-02",
+    //   "kpis": { "total": 412, "avg_rating": 4.23, "med_rating": 4.3, "avg_reviews": 87, "weighted": 4.12 },
+    //   "top_services": ["cut & style", "coloring", "extensions"],
+    //   "summary_html": "<p>Concise 2–4 bullet executive summary.</p>",
+    //   "embeds": {
+    //     "density_by_neighborhood": "<IFRAME_SRC_FROM_LAKEVIEW>",
+    //     "neighborhood_weighted_rating": "<IFRAME_SRC_FROM_LAKEVIEW>",
+    //     "map_heatmap": "<IFRAME_SRC_FROM_LAKEVIEW>",
+    //     "top20_table": "<IFRAME_SRC_FROM_LAKEVIEW>",
+    //     "bottom20_table": "<IFRAME_SRC_FROM_LAKEVIEW>"
+    //   },
+    //   "reviews": { "praises": ["…"], "complaints": ["…"] },
+    //   "footer": "Dataset: Apify Google Maps · Engine: Databricks Lakehouse"
+    // }
+
+    async function loadConfig() {
+      try {
+        const res = await fetch('config.json', { cache: 'no-store' });
+        if (!res.ok) throw new Error('Missing config.json');
+        const cfg = await res.json();
+
+        // Logo & meta
+        if (cfg.logoUrl) document.getElementById('logo').src = cfg.logoUrl;
+        document.getElementById('reportTitle').textContent = cfg.title || 'Sector Report';
+        document.getElementById('reportLocation').textContent = cfg.location || '—';
+        document.getElementById('reportDate').textContent = cfg.date || new Date().toISOString().slice(0,10);
+
+        // Summary
+        document.getElementById('summaryText').innerHTML = cfg.summary_html || '<p class="muted">Add a brief summary in <code>config.json</code> → <code>summary_html</code>.</p>';
+
+        // KPIs
+        const k = cfg.kpis || {};
+        document.getElementById('kpi_total').textContent = k.total ?? '—';
+        document.getElementById('kpi_avg_rating').textContent = (k.avg_rating ?? '—');
+        document.getElementById('kpi_med_rating').textContent = (k.med_rating ?? '—');
+        document.getElementById('kpi_avg_reviews').textContent = k.avg_reviews ?? '—';
+        document.getElementById('kpi_weighted').textContent = (k.weighted ?? '—');
+
+        // Services chips
+        const svc = (cfg.top_services || []);
+        const svcWrap = document.getElementById('kpi_services');
+        if (svc.length === 0) svcWrap.innerHTML = '<span class="small muted">No service tags provided.</span>';
+        svc.forEach(s => {
+          const span = document.createElement('span');
+          span.className = 'pill'; span.textContent = s; svcWrap.appendChild(span);
+        });
+
+        // Embeds
+        const embeds = cfg.embeds || {};
+        document.querySelectorAll('iframe[data-embed-key]').forEach(ifr => {
+          const key = ifr.getAttribute('data-embed-key');
+          const src = embeds[key];
+          if (src) ifr.src = src; else {
+            ifr.replaceWith(Object.assign(document.createElement('div'), { className: 'small muted card', innerHTML: `Missing embed URL for <code>${key}</code> in config.json` }));
+          }
+        });
+
+        // Review bullets
+        const rev = cfg.reviews || { praises: [], complaints: [] };
+        const addLis = (ul, arr) => arr.forEach(t => { const li = document.createElement('li'); li.textContent = t; ul.appendChild(li); });
+        addLis(document.getElementById('praises'), rev.praises || []);
+        addLis(document.getElementById('complaints'), rev.complaints || []);
+
+        document.getElementById('footerMeta').textContent = cfg.footer || '';
+      } catch (e) {
+        console.error(e);
+        document.getElementById('summaryText').innerHTML = '<p class="muted">Could not load <code>config.json</code>. Place it next to this HTML file.</p>';
+      }
+    }
+
+    loadConfig();
+  </script>
+</body>
+</html>
