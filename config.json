@@ -11,8 +11,8 @@
     "density_by_neighborhood": "https://dbc-2ed12710-091f.cloud.databricks.com/embed/dashboardsv3/01f08871a18518b0b82e1caeebdac565?o=2878672827937391",
     "neighborhood_weighted_rating": "https://dbc-2ed12710-091f.cloud.databricks.com/embed/dashboardsv3/01f0887269c4185f9c9fea0dd4de0d21?o=2878672827937391",
     "map_heatmap": "https://dbc-2ed12710-091f.cloud.databricks.com/embed/dashboardsv3/01f0886fa68e1a2fa08ca32046ee0c50?o=2878672827937391",
-    "top20_table": "https://dbc-2ed12710-091f.cloud.databricks.com/embed/dashboardsv3/01f088735bce1e64a3a2e3b66af24229?o=2878672827937391",
-    "bottom20_table": "https://dbc-2ed12710-091f.cloud.databricks.com/embed/dashboardsv3/01f08873bcdc1064a1f51302512130ca?o=2878672827937391"
+    "top25_table": "https://dbc-2ed12710-091f.cloud.databricks.com/embed/dashboardsv3/01f088735bce1e64a3a2e3b66af24229?o=2878672827937391",
+    "bottom25_table": "https://dbc-2ed12710-091f.cloud.databricks.com/embed/dashboardsv3/01f08873bcdc1064a1f51302512130ca?o=2878672827937391"
   },
   "reviews": { "praises": [], "complaints": [] },
   "footer": "Dataset: Apify Google Maps · Engine: Databricks Lakehouse"
